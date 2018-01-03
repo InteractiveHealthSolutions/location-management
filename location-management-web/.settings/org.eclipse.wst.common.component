@@ -6,7 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <dependent-module archiveName="location-management-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/location-management-api/location-management-api">
+        <dependent-module archiveName="location-management-api-1.0.0a.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/location-management-api/location-management-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="location-management-web"/>

@@ -1,2 +1,2 @@
 
-<% response.sendRedirect("locations.html"); %>
+<% response.sendRedirect("viewLocations.htm"); %>

@@ -31,14 +31,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<!-- Set the current session context -->
-	 <property name="current_session_context_class">thread</property>
-
-		<mapping class="com.ihs.locationmanagement.api.model.Location" />
-		<mapping class="com.ihs.locationmanagement.api.model.LocationType" />
-		<mapping class="com.ihs.locationmanagement.api.model.LocationAttribute" />
-		<mapping class="com.ihs.locationmanagement.api.model.LocationAttributeType" />
-		
-
-    </session-factory>
+<!-- 	 <property name="current_session_context_class">thread</property>
+ -->    </session-factory>
 
 </hibernate-configuration>

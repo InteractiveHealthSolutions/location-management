@@ -10,8 +10,13 @@
   <artifactId>location-management-web</artifactId>
   <packaging>war</packaging>
   <name>location-management-web Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
+  
+	  <dependencies>
+		<dependency>
+			<groupId>net.sf.supercsv</groupId>
+			<artifactId>super-csv</artifactId>
+			<version>2.0.0</version>
+		</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -66,7 +71,7 @@
 		<dependency>
 			<groupId>com.ihs</groupId>
 			<artifactId>location-management-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
     <groupId>org.codehaus.jettison</groupId>

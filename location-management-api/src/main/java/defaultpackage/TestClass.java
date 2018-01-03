@@ -1,12 +1,12 @@
 package defaultpackage;
 
-import com.ihs.locationmanagement.mode.dao.hibernatedimpl.HibernateUtil;
+import org.ird.unfepi.model.dao.hibernatedimpl.LocationHibernateUtil;
 
 public class TestClass {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		HibernateUtil.getSessionFactory(null, null);
+		LocationHibernateUtil.getSessionFactory(null, null);
 
 	}
 
