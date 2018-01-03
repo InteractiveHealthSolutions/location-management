@@ -28,11 +28,11 @@ public class LocationServiceImpl implements LocationService {
 		this.daoLocationAttributeType = daoLocationAttributeType;
 	}
 
-	public List findLocationById(int cityId, boolean isreadonly, String[] mappingsToJoin) {
+	public Location findLocationById(int cityId, boolean isreadonly, String[] mappingsToJoin) {
 		return daoLocation.findById(cityId, isreadonly, mappingsToJoin);
 	}
 	
-	public List findLocationByName(String name, boolean isreadonly, String[] mappingsToJoin) {
+	public Location findLocationByName(String name, boolean isreadonly, String[] mappingsToJoin) {
 		return daoLocation.findByName(name, isreadonly, mappingsToJoin);
 	}
 	

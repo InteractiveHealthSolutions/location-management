@@ -32,7 +32,7 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 		return LAST_QUERY_TOTAL_ROW_COUNT;
 	}
 
-	public List findById(int cityId, boolean isreadonly, String[] mappingsToJoin) {
+	public Location findById(int cityId, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria criteria = session.createCriteria(Location.class).add(Restrictions.eq("locationId", cityId));
 //		CriteriaBuilder builder = session.getCriteriaBuilder();
 //		CriteriaQuery<Location> criteria = builder.createQuery(Location.class);
@@ -41,11 +41,11 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 //		List<Location> list = session.createQuery( criteria ).setReadOnly(isreadonly).getResultList();
 		
 		setLAST_QUERY_TOTAL_ROW_COUNT(criteria.list().size());
-		return (criteria.list().size() == 0 ? null : criteria.list());
+		return (Location) (criteria.list().size() == 0 ? null : criteria.list().get(0));
 	}
 
 	@SuppressWarnings("unchecked")
-	public List findByName(String name, boolean isreadonly, String[] mappingsToJoin) {
+	public Location findByName(String name, boolean isreadonly, String[] mappingsToJoin) {
 	Criteria criteria = session.createCriteria(Location.class).add(Restrictions.eq("name", name));
 //		CriteriaBuilder builder = session.getCriteriaBuilder();
 //		CriteriaQuery<Location> criteria = builder.createQuery(Location.class);
@@ -54,7 +54,7 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 //		List<Location> list = session.createQuery( criteria ).setReadOnly(isreadonly).getResultList();
 		//List<Location> list = (List<Location>) session.createCriteria(Location.class).add(Restrictions.eq("name", name));
 		setLAST_QUERY_TOTAL_ROW_COUNT(criteria.list().size());
-		return (criteria.list().size() == 0 ? null : criteria.list());
+		return (Location) (criteria.list().size() == 0 ? null : criteria.list().get(0));
 	}
 
 	public Location findByShortName(String shortName, boolean isreadonly, String[] mappingsToJoin) {

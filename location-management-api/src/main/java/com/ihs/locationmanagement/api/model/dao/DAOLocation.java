@@ -6,11 +6,11 @@ import com.ihs.locationmanagement.api.model.Location;;
 
 public interface DAOLocation extends DAO {
 	
-	List findById(int cityId, boolean isreadonly, String[] mappingsToJoin);
+	Location findById(int cityId, boolean isreadonly, String[] mappingsToJoin);
 
 	Number LAST_QUERY_TOTAL_ROW_COUNT();
 
-	List findByName(String name, boolean isreadonly, String[] mappingsToJoin);
+	Location findByName(String name, boolean isreadonly, String[] mappingsToJoin);
 	
 	Location findByShortName(String shortName, boolean isreadonly, String[] mappingsToJoin);
 

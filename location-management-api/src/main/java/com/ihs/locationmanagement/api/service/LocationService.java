@@ -6,9 +6,9 @@ import com.ihs.locationmanagement.api.model.*;
 
 public interface LocationService {
 	
-	List findLocationById(int cityId, boolean isreadonly, String[] mappingsToJoin);
+	Location findLocationById(int cityId, boolean isreadonly, String[] mappingsToJoin);
 	
-	List findLocationByName(String name, boolean isreadonly, String[] mappingsToJoin);
+	Location findLocationByName(String name, boolean isreadonly, String[] mappingsToJoin);
 
 	Location findLocationByShortName(String shortName, boolean isreadonly, String[] mappingsToJoin);
 	
