@@ -9,9 +9,9 @@
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         
-        <property name="connection.url">jdbc:mysql://localhost:3306/locationdb</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/unfepi</property>
 		<property name="connection.username">root</property>
-        <property name="connection.password">ihs_dev</property>
+        <property name="connection.password">password</property>
 
         <!-- Live Database Credentials -->
         <!-- <property name="connection.url">jdbc:mysql://202.141.249.106:6914/locationsdb?useSSL=false</property> -->
@@ -25,10 +25,10 @@
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <!-- Echo the SQL to stdout -->
-        <property name="show_sql">true</property>
+        <!-- <property name="show_sql">true</property> -->
 		
         <!-- Create/Update Database on Runtime -->
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
 		
 		<!-- Set the current session context -->
 <!-- 	 <property name="current_session_context_class">thread</property>

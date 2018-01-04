@@ -1,6 +1,7 @@
 package org.ird.unfepi.context;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.management.InstanceAlreadyExistsException;
 
@@ -9,22 +10,14 @@ import org.hibernate.SessionFactory;
 import org.ird.unfepi.model.dao.hibernatedimpl.*;
 
 public class LocationContext {
+	
+	private static Logger log = Logger.getLogger(LocationContext.class.getName());
 
 	private static LocationContext _instance;
-//	private Properties properties;
-
 	private static SessionFactory sessionFactory;
 
-//	public static Properties properties() {
-//		return _instance.properties;
-//	}
-//	public static String property(String key) {
-//		return properties().getProperty(key);
-//	}
-
-//	private LocationContext(Properties properties) {
-//		this.properties = properties;
-//	}
+	private LocationContext() {
+	}
 	
 	public static void instantiate(Properties properties) throws InstanceAlreadyExistsException{
 		if(_instance != null){
@@ -34,7 +27,16 @@ public class LocationContext {
 		// session factory must have been instantiated before we could use any method involving data
 		sessionFactory = LocationHibernateUtil.getSessionFactory(properties, null);
 
-//		_instance = new LocationContext(properties);
+		_instance = new LocationContext();
+	}
+	
+	public static void instantiateWithSessionFactory(SessionFactory sessionFactory) throws InstanceAlreadyExistsException{
+		if(_instance != null){
+			throw new InstanceAlreadyExistsException("An instance of LocationContext already exists in system. Make sure to maintain correct flow.");
+		}
+		
+		LocationContext.sessionFactory = sessionFactory;
+		_instance = new LocationContext();
 	}
 	
 	/*public static Statistics getStatistics(){
@@ -43,10 +45,23 @@ public class LocationContext {
 		return stats;
 	}*/
 	
+	public static SessionFactory getSessionFactory() {
+		if(sessionFactory == null) {
+			log.info("Location sessionFactory is null initing it now with defaults...");
+			try {
+				instantiate(null);
+			} catch (InstanceAlreadyExistsException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return sessionFactory;
+	}
+
 	/** Before calling this method make sure that LocationContext has been instantiated ONCE and ONLY ONCE by calling {@linkplain LocationContext#instantiate} method
+	 * @throws InstanceAlreadyExistsException 
 	 */
 	public static Session getNewSession() {
-		return sessionFactory.openSession();
+		return getSessionFactory().openSession();
 	}
 	
 	/** Before calling this method make sure that LocationContext has been instantiated ONCE and ONLY ONCE by calling {@linkplain LocationContext#instantiate} method
@@ -57,6 +72,6 @@ public class LocationContext {
 	 * @return the services
 	 */
 	public static LocationServiceContext getServices(){
-		return new LocationServiceContext(sessionFactory);
+		return new LocationServiceContext(getSessionFactory());
 	}
 }

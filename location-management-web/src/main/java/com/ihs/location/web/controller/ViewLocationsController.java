@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/viewLocations")
+@RequestMapping("/tree")
 public class ViewLocationsController {
 
 	@RequestMapping(method={RequestMethod.GET})
@@ -195,7 +195,7 @@ public class ViewLocationsController {
 			model.put("locationTypeNodes", locationTypeNodes);
 			model.put("locationAttributeNodes", locationAttributeNodes);
 			model.put("locationAttributeTypeNodes", locationAttributeTypeNodes);
-			return new ModelAndView("", "model", model);
+			return new ModelAndView("locationtree", "model", model);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

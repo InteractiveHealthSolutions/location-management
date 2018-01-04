@@ -33,7 +33,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.mysql.jdbc.StringUtils;
 
 @Controller
-@RequestMapping("/location")
+@RequestMapping("/rest")
 public class LocationModalController {
 
 	@RequestMapping(value = "/newlocation", method = {RequestMethod.POST, RequestMethod.GET})
@@ -97,6 +97,7 @@ public class LocationModalController {
 			if(locationType == null) {
 				locationType = new LocationType();
 				locationType.setTypeName(name);
+				locationType.setIsEditable(true);
 				if(level.equals("")) { locationType.setLevel(0); }
 				else { locationType.setLevel(strToInt(level)); }
 				locationType.setDescription(description);

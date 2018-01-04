@@ -6,6 +6,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry excluding="lmv/css/awesomeStyle/|lmv/css/awesomeStyle/img/|lmv/css/metroStyle/|lmv/css/metroStyle/img/|lmv/css/zTreeStyle/|lmv/images/|lmv/js/|lmv/js/exportcsv/|lmv/js/jquery/|lmv/js/ztree/|lmv/jsp/|lmv/|lmv/css/" kind="src" path="src/main/webapp"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -17,16 +18,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="css/awesomeStyle/|css/awesomeStyle/img/|css/metroStyle/|css/metroStyle/img/|css/zTreeStyle/|images/|js/|js/exportcsv/|js/jquery/|js/ztree/|css/|lmv/" kind="src" path="src/main/webapp"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
