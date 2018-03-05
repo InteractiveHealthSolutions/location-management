@@ -563,7 +563,7 @@ public class LocationModalController {
 									
 									try{
 										List<LocationAttribute> latl = sc.getLocationService()
-											.findLocationAttributeByCriteria("TEXT", null, loc.getLocationId(), headerIdMap.get(columnName), 0, 1, false, null, null);
+											.findLocationAttributeByCriteria("TEXT", null, null, null, loc.getLocationId(), headerIdMap.get(columnName), 0, 1, false, null, null);
 									
 										LocationAttribute locationAttribute = null;
 										if(latl.isEmpty()){

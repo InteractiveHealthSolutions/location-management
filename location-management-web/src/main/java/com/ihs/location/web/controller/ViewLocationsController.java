@@ -119,7 +119,7 @@ public class ViewLocationsController {
 					
 					locationNode.put("attributes", new JSONArray());
 					
-					List<LocationAttribute> locationAttibL = sc.getLocationService().findLocationAttributeByCriteria("text", null, locations.get(i).getLocationId(), null, 0, 1000, true, null, null);
+					List<LocationAttribute> locationAttibL = sc.getLocationService().findLocationAttributeByCriteria("text", null, null, null, locations.get(i).getLocationId(), null, 0, 1000, true, null, null);
 					for (LocationAttribute locationAttribute : locationAttibL) {
 						JSONObject locationAttributeNode = new JSONObject();
 						locationAttributeNode.put("id", locationAttribute.getLocationAttributeId());

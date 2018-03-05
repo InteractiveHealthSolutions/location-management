@@ -41,7 +41,7 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 	}
 
 	@Override
-	public LocationAttribute findByValue(String value, boolean isreadonly, String[] mappingsToJoin) {
+	public List<LocationAttribute> findByValue(String value, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationAttribute.class)
 				.add(Restrictions.eq("value", value)).setReadOnly(isreadonly);
 		
@@ -54,11 +54,11 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
 		List<LocationAttribute> list = cri.list();
-		return (list.size() == 0 ? null : list.get(0));
+		return (list.size() == 0 ? null : list);
 	}
 
 	@Override
-	public LocationAttribute findByTypeName(String typeName, boolean isreadonly, String[] mappingsToJoin) {
+	public List<LocationAttribute> findByTypeName(String typeName, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationAttribute.class)
 				.add(Restrictions.eq("typeName", typeName)).setReadOnly(isreadonly);
 		
@@ -71,41 +71,7 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
 		List<LocationAttribute> list = cri.list();
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-	@Override
-	public LocationAttribute findByTypeValue1(String typeValue, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(LocationAttribute.class)
-				.add(Restrictions.eq("typeValue1", typeValue)).setReadOnly(isreadonly);
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-
-		setLAST_QUERY_TOTAL_ROW_COUNT((Number) cri.setProjection(Projections.rowCount()).uniqueResult());
-		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-
-		List<LocationAttribute> list = cri.list();
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-	@Override
-	public LocationAttribute findByTypeValue2(String typeValue, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(LocationAttribute.class)
-				.add(Restrictions.eq("typeValue1", typeValue)).setReadOnly(isreadonly);
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-
-		setLAST_QUERY_TOTAL_ROW_COUNT((Number) cri.setProjection(Projections.rowCount()).uniqueResult());
-		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-
-		List<LocationAttribute> list = cri.list();
-		return (list.size() == 0 ? null : list.get(0));
+		return (list.size() == 0 ? null : list);
 	}
 	
 	/* (non-Javadoc)
@@ -137,7 +103,9 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 	}
 
 	@Override
-	public List<LocationAttribute> findByCriteria(String typeName, String value, Integer locationId, Integer locationAttributeTypeId, int firstResult, int fetchsize ,boolean isreadonly, String[] mappingsToJoin, String[] sqlFilter) {
+	public List<LocationAttribute> findByCriteria(String typeName, String value, String typeValue1, String typeValue2,
+			Integer locationId, Integer locationAttributeTypeId, boolean isreadonly, 
+			String[] mappingsToJoin, String[] sqlFilter) {
 		
 		Criteria cri=session.createCriteria(LocationAttribute.class);
 		if(locationId!=null){
@@ -149,6 +117,13 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 		if(typeName!=null){
 			cri.add(Restrictions.eq("typeName", typeName));
 		}
+		if(typeValue1 != null){
+			cri.add(Restrictions.eq("typeValue1", typeValue1));
+		}
+		if(typeValue2 != null){
+			cri.add(Restrictions.eq("typeValue2", typeValue2));
+		}
+		
 		if((value!=null) && (!(value.equals("")))){
 			cri.add(Restrictions.eq("value", value));
 		}
@@ -167,7 +142,7 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 		for (String mapping : mappingsToJoin) {
 			cri.setFetchMode(mapping, FetchMode.JOIN);
 		}
-		List<LocationAttribute> list = cri.setReadOnly(isreadonly).setFirstResult(firstResult).setMaxResults(fetchsize).list();
+		List<LocationAttribute> list = cri.setReadOnly(isreadonly).list();
 		return list;
 	}
 }

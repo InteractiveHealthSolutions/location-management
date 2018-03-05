@@ -110,3 +110,78 @@ CREATE TABLE `locationtype` (
   UNIQUE KEY `typeName_UNIQUE` (`typeName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
+--
+-- Table structure for table `location_hierarchy_ancester`
+--
+
+CREATE TABLE `location_hierarchy_ancester` (
+  `locationId` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(45) DEFAULT NULL,
+  `relative` int(11) NOT NULL DEFAULT '0',
+  `relativeName` varchar(45) DEFAULT NULL,
+  `locationType` int(11) NOT NULL,
+  `relativeLocationType` int(11) NOT NULL,
+  `ancestry` varchar(1024) DEFAULT NULL,
+  `isRelative` int(1) DEFAULT NULL,
+  KEY `locationId` (`locationId`),
+  KEY `ancestry` (`ancestry`(255)),
+  KEY `relative` (`relative`),
+  KEY `locationType` (`locationType`),
+  KEY `isRelative` (`isRelative`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+CREATE FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+    DECLARE rv VARCHAR(1024);
+    DECLARE cm CHAR(1);
+    DECLARE ch INT;
+
+    SET rv = '';
+    SET cm = '';
+    SET ch = GivenID;
+    WHILE ch > 0 DO
+        SELECT IFNULL(parentLocation,-1) INTO ch FROM
+        (SELECT parentLocation FROM location WHERE locationId = ch) A;
+        IF ch > 0 THEN
+            SET rv = CONCAT(rv,cm,ch);
+            SET cm = ',';
+        END IF;
+    END WHILE;
+    RETURN rv;
+END
+
+
+CREATE  FUNCTION `GetAncestryOf`(GivenID INT) RETURNS varchar(1024) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+
+RETURN (SELECT ancestry FROM location_hierarchy_ancester WHERE locationId=GivenID AND relative=locationId LIMIT 1);
+   
+END
+
+
+CREATE  PROCEDURE `DMP_Metadata_Builder`()
+BEGIN
+
+-- Create location hierarchy tree
+DROP TABLE IF EXISTS location_hierarchy_ancester;
+CREATE TABLE location_hierarchy_ancester(INDEX(locationId), INDEX(ancestry(255)),INDEX(relative),INDEX(locationType),INDEX(isRelative))
+SELECT l.locationId, l.name, l2.locationId relative,l2.name relativeName, l.locationType, l2.locationType relativeLocationType, 
+l.ancestry, (l.locationId=l2.locationId OR l.ancestry REGEXP CONCAT('(^|.*,)',l2.locationId,'(,.*|$)')) isRelative
+FROM (SELECT locationId, name, locationType, GETAncestry(locationId) ancestry FROM location) l 
+CROSS JOIN location l2 
+WHERE (l.locationId=l2.locationId OR l.ancestry REGEXP CONCAT('(^|.*,)',l2.locationId,'(,.*|$)'));    
+
+update location l  
+left join location_hierarchy_ancester dv on l.locationId=dv.locationId and dv.relativeLocationType=9 
+left join location_hierarchy_ancester d on l.locationId=d.locationId and d.relativeLocationType=1 
+left join location_hierarchy_ancester t on l.locationId=t.locationId and t.relativeLocationType=2 
+left join location_hierarchy_ancester u on l.locationId=u.locationId and u.relativeLocationType=3 
+set description=concat(ifnull(dv.relativeName,''), ' - ', ifnull(d.relativeName, ''), 
+	' - ', ifnull(t.relativeName, ''), ' - ', ifnull(u.relativeName,''))
+where l.locationType=12;
+
+END

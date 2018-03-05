@@ -13,23 +13,13 @@ import org.ird.unfepi.model.Location;
  */
 public interface DAOLocation extends DAO {
 	
-	Location findById(int cityId, boolean isreadonly, String[] mappingsToJoin);
+	Location findById(int locationid, boolean isreadonly, String[] mappingsToJoin);
 
 	Number LAST_QUERY_TOTAL_ROW_COUNT();
 
 	Location findByName(String name, boolean isreadonly, String[] mappingsToJoin);
 	
-	Location findByShortName(String shortName, boolean isreadonly, String[] mappingsToJoin);
-
-	Location findByFullName(String fullName, boolean isreadonly, String[] mappingsToJoin);
-
-	Location findByDescription(String description, boolean isreadonly, String[] mappingsToJoin);
-
 	Location findByIdentifier(String identifier, boolean isreadonly, String[] mappingsToJoin);
-
-	Location findByLatitude(String latitude, boolean isreadonly, String[] mappingsToJoin);
-
-	Location findByLongitude(String longitude, boolean isreadonly, String[] mappingsToJoin);
 	
 	List<Location> findLocationByVoided(boolean voided, boolean isreadonly, String[] mappingsToJoin);
 

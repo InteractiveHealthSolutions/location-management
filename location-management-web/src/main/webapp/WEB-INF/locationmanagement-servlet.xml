@@ -11,6 +11,7 @@
 						   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<context:component-scan base-package="com.ihs.location.web.controller" />
+ 	<context:component-scan base-package="com.ihs.location.rest.resources" />
  
   	<mvc:annotation-driven/>
  	<mvc:resources mapping="/resources/**" location="/lmv/"/>

@@ -37,9 +37,9 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 	}
 
 	@Override
-	public Location findById(int cityId, boolean isreadonly, String[] mappingsToJoin) {
+	public Location findById(int locationid, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
-				.add(Restrictions.eq("locationId", cityId));
+				.add(Restrictions.eq("locationId", locationid));
 		
 		if(mappingsToJoin != null)
 			for (String mapping : mappingsToJoin) {
@@ -68,53 +68,7 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 		if(mappingsToJoin != null)
 			for (String mapping : mappingsToJoin) {
 				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		List<Location> list = cri.list();
-		//setLAST_QUERY_TOTAL_ROW_COUNT(list.size());
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-
-	@Override
-	public Location findByShortName(String shortName, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
-				.add(Restrictions.eq("shortName", shortName));
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		List<Location> list = cri.list();
-		//setLAST_QUERY_TOTAL_ROW_COUNT(list.size());
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-	@Override
-	public Location findByFullName(String fullName, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
-				.add(Restrictions.eq("fullName", fullName));
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		List<Location> list = cri.list();
-		//setLAST_QUERY_TOTAL_ROW_COUNT(list.size());
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-	@Override
-	public Location findByDescription(String description, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
-				.add(Restrictions.eq("description", description));
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
+		}
 		
 		List<Location> list = cri.list();
 		//setLAST_QUERY_TOTAL_ROW_COUNT(list.size());
@@ -125,36 +79,6 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 	public Location findByIdentifier(String identifier, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
 				.add(Restrictions.eq("identifier", identifier));
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		List<Location> list = cri.list();
-		//setLAST_QUERY_TOTAL_ROW_COUNT(list.size());
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-	@Override
-	public Location findByLatitude(String latitude, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
-				.add(Restrictions.eq("latitude", latitude));
-		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		List<Location> list = cri.list();
-		//setLAST_QUERY_TOTAL_ROW_COUNT(list.size());
-		return (list.size() == 0 ? null : list.get(0));
-	}
-
-	@Override
-	public Location findByLongitude(String longitude, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(Location.class).setReadOnly(isreadonly)
-				.add(Restrictions.eq("longitude", longitude));
 		
 		if(mappingsToJoin != null)
 			for (String mapping : mappingsToJoin) {
@@ -199,16 +123,10 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 	
 	@Override
 	public List<Location> findByHQL(int locId, boolean isreadonly, String[] mappingsToJoin) {
-		//String hql = "Distinct GetTree("+Integer.toString(locId)+") FROM Location l";
-		
-		//"select *, GetTree(509), l.* from location l where locationId ="+ '509'
 		String hql = "select  GetTree("+locId+") from location l where locationId ="+ locId;
-		//String hql = "SELECT hello(509) from Location l";
-		 SQLQuery query = session.createSQLQuery(hql);
+		SQLQuery query = session.createSQLQuery(hql);
 		
 		List list = query.list();
-//		List<Location> list = query.list();
-		//System.out.println(query.list());
 		return list;	
 	}
 }
