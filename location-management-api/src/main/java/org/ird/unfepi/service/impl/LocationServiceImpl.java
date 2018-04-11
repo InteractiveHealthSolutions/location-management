@@ -139,7 +139,7 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public void updateLocationType(LocationType locationType) {
-		daoLocationType.update(locationType);
+		daoLocationType.saveOrUpdate(locationType);
 	}
 
 	@Override

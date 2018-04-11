@@ -80,4 +80,9 @@ public class LocationServiceContext {
 	{
 		session.flush();
 	}
+	
+	public Session getSession()
+	{
+		return session;
+	}
 }

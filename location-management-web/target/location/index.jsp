@@ -1,2 +1,2 @@
 
-<% response.sendRedirect("viewLocations.htm"); %>
+<% response.sendRedirect("/tree"); %>

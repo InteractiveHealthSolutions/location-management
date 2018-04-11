@@ -36,6 +36,7 @@ import com.mysql.jdbc.StringUtils;
 @RequestMapping("/rest")
 public class LocationModalController {
 
+	//Done
 	@RequestMapping(value = "/newlocation", method = {RequestMethod.POST, RequestMethod.GET})
 	public @ResponseBody String addlocation(@RequestParam("name")String name, @RequestParam("shortName")String shortName, @RequestParam("fullName")String fullName, @RequestParam("pName")String parentName, @RequestParam("description")String description, @RequestParam("otherIdentifier")String otherIdentifier, @RequestParam("typeName")String typeName, @RequestParam("latitude")String latitude, @RequestParam("longitude")String longitude) throws JSONException, InstanceAlreadyExistsException {
 		LocationServiceContext sc = LocationContext.getServices();
@@ -84,6 +85,7 @@ public class LocationModalController {
 		} return result.toString();
 	}
 
+	//Done
 	@RequestMapping(value = "/newlocationtype", method = {RequestMethod.POST, RequestMethod.GET})
 	public @ResponseBody String addlocationType(@RequestParam("name")String name, @RequestParam("level")String level, @RequestParam("description")String description) throws InstanceAlreadyExistsException {
 		LocationServiceContext sc = LocationContext.getServices();
@@ -123,6 +125,7 @@ public class LocationModalController {
 		} return result.toString();
 	}	
 
+	//Done
 	@RequestMapping(value = "/newlocationattributetype", method = {RequestMethod.POST, RequestMethod.GET})
 	public @ResponseBody String addlocationattributetype(@RequestParam("name")String locationAttributeTypeName, @RequestParam("displayName")String locationAttributeTypeDisplayName, @RequestParam("description")String locationAttributeTypeDescription, @RequestParam("category")String locationAttributeTypeCategory) throws JSONException, InstanceAlreadyExistsException {
 		LocationServiceContext sc = LocationContext.getServices();

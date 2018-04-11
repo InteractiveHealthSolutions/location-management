@@ -12,6 +12,7 @@
 
 	<context:component-scan base-package="com.ihs.location.web.controller" />
  	<context:component-scan base-package="com.ihs.location.rest.resources" />
+  	<context:component-scan base-package="com.ihs.location.beans" />
  
   	<mvc:annotation-driven/>
  	<mvc:resources mapping="/resources/**" location="/lmv/"/>
