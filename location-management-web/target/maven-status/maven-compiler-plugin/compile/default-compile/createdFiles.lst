@@ -1,8 +1,0 @@
-com\ihs\location\rest\resources\LocationTypeResource.class
-com\ihs\location\rest\resources\LocationAttributeTypeResource.class
-com\ihs\location\beans\LocationBean.class
-com\ihs\location\beans\LocationAttributeTypeBean.class
-com\ihs\location\web\controller\LocationModalController.class
-com\ihs\location\rest\resources\LocationResource.class
-com\ihs\location\web\controller\ViewLocationsController.class
-com\ihs\location\beans\LocationTypeBean.class
