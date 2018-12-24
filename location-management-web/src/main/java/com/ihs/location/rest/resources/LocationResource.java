@@ -2,15 +2,10 @@ package com.ihs.location.rest.resources;
 
 import java.text.ParseException;
 
-import javax.management.InstanceAlreadyExistsException;
-
-import org.codehaus.jettison.json.JSONException;
 import org.ird.unfepi.context.LocationContext;
 import org.ird.unfepi.context.LocationServiceContext;
 import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.LocationType;
-import org.json.simple.JSONObject;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +20,7 @@ import com.ihs.location.beans.LocationBean;
 public class LocationResource {
 	
 	@RequestMapping(value = "/newlocation", method = {RequestMethod.POST})
-	public @ResponseBody String addlocation(@RequestBody LocationBean location) throws JSONException, InstanceAlreadyExistsException {
+	public @ResponseBody String addlocation(@RequestBody LocationBean location) {
 		LocationServiceContext sc = LocationContext.getServices();
 		try{
 			Location parentLocation = sc.getLocationService().findLocationById(location.getParentLocation(), true, null) ;
@@ -88,7 +83,7 @@ public class LocationResource {
 	}
 	
 	@RequestMapping(value = "/deletelocation/{identifier}", method = {RequestMethod.PUT})
-	public @ResponseBody String deletelocation(@PathVariable("identifier") String identifier) throws JSONException, InstanceAlreadyExistsException {
+	public @ResponseBody String deletelocation(@PathVariable("identifier") String identifier) {
 		LocationServiceContext sc = LocationContext.getServices();
 		try{
 			Location loc = sc.getLocationService().findLocationById(Integer.parseInt(identifier), false, null);

@@ -98,9 +98,6 @@ public class DAOLocationAttributeTypeImpl  extends DAOHibernateImpl implements D
 		return LAST_QUERY_TOTAL_ROW_COUNT;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.ird.unfepi.model.dao.LocationAttributeType#getAll()
-	 */
 	@Override
 	public List<LocationAttributeType> getAll(boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationAttributeType.class).setReadOnly(isreadonly);

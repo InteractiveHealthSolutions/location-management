@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.ird.unfepi.service.impl;
 
 import java.io.Serializable;
@@ -18,10 +15,6 @@ import org.ird.unfepi.model.dao.DAOLocationHierarchyAncester;
 import org.ird.unfepi.model.dao.DAOLocationType;
 import org.ird.unfepi.service.LocationService;
 
-/**
- * @author Safwan
- *
- */
 public class LocationServiceImpl implements LocationService {
 	
 	private DAOLocation daoLocation;

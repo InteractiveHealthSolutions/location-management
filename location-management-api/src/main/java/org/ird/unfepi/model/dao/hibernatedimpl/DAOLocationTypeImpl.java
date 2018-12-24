@@ -38,10 +38,7 @@ public class DAOLocationTypeImpl extends DAOHibernateImpl implements DAOLocation
 		List<LocationType> list = cri.list();
 		return (list.size() == 0 ? null : list.get(0));
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.ird.unfepi.model.dao.DAOLocationType#findByName(java.lang.String)
-	 */
+
 	@Override
 	public LocationType findByName(String name, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationType.class)
@@ -85,9 +82,6 @@ public class DAOLocationTypeImpl extends DAOHibernateImpl implements DAOLocation
 		return LAST_QUERY_TOTAL_ROW_COUNT;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.ird.unfepi.model.dao.DAOLocationType#getAll()
-	 */
 	@Override
 	public List<LocationType> getAll(boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationType.class).setReadOnly(isreadonly);

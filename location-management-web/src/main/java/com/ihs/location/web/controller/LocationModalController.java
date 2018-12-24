@@ -12,15 +12,15 @@ import java.util.Map;
 import javax.management.InstanceAlreadyExistsException;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.ird.unfepi.context.LocationContext;
 import org.ird.unfepi.context.LocationServiceContext;
 import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.LocationAttribute;
 import org.ird.unfepi.model.LocationAttributeType;
 import org.ird.unfepi.model.LocationType;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

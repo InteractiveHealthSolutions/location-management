@@ -2,12 +2,8 @@ package com.ihs.location.rest.resources;
 
 import java.text.ParseException;
 
-import javax.management.InstanceAlreadyExistsException;
-
-import org.codehaus.jettison.json.JSONException;
 import org.ird.unfepi.context.LocationContext;
 import org.ird.unfepi.context.LocationServiceContext;
-import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.LocationType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ihs.location.beans.LocationBean;
 import com.ihs.location.beans.LocationTypeBean;
 
 @RestController
@@ -24,7 +19,7 @@ import com.ihs.location.beans.LocationTypeBean;
 public class LocationTypeResource {
 
 	@RequestMapping(value = "/addlocationtype", method = {RequestMethod.POST})
-	public @ResponseBody String addlocation(@RequestBody LocationTypeBean location) throws JSONException, InstanceAlreadyExistsException {
+	public @ResponseBody String addlocation(@RequestBody LocationTypeBean location) {
 		LocationServiceContext sc = LocationContext.getServices();
 		try{
 			LocationType locType = new LocationType();

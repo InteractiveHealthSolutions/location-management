@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.ird.unfepi.model.dao.hibernatedimpl;
 import java.util.List;
 
@@ -14,23 +11,12 @@ import org.hibernate.criterion.Restrictions;
 import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.dao.DAOLocation;
 
-/**
- * @author Safwan
- *
- */
-
 @SuppressWarnings({"unchecked"})
 public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 	
-	/** The session. */
 	private Session session ;
 	private Number LAST_QUERY_TOTAL_ROW_COUNT;
 
-	/**
-	 * Instantiates a new dAO address impl.
-	 *
-	 * @param session the session
-	 */
 	public DAOLocationImpl(Session session) {
 		super(session);
 		this.session=session;
@@ -126,6 +112,7 @@ public class DAOLocationImpl extends DAOHibernateImpl implements DAOLocation {
 		String hql = "select  GetTree("+locId+") from location l where locationId ="+ locId;
 		SQLQuery query = session.createSQLQuery(hql);
 		
+		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		return list;	
 	}

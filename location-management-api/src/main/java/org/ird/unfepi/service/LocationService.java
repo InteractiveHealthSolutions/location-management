@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.ird.unfepi.service;
 
 import java.io.Serializable;
@@ -12,10 +9,6 @@ import org.ird.unfepi.model.LocationAttributeType;
 import org.ird.unfepi.model.LocationHierarchyAncester;
 import org.ird.unfepi.model.LocationType;
 
-/**
- * @author Zohaib Masood
- *
- */
 public interface LocationService {
 	List<Object> getDataBySQL(String sql);
 	

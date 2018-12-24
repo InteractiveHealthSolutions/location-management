@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.ird.unfepi.model.dao;
 
 import java.util.List;

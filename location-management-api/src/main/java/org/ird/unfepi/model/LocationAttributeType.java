@@ -4,17 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name="locationattributetype")
@@ -99,74 +94,34 @@ public class LocationAttributeType {
 		this.displayName = displayName;
 	}
 	
-	/**
-	 * Gets the created by user id.
-	 *
-	 * @return the created by user id
-	 */
 	public String getCreatedByUserId() {
 		return createdByUserId;
 	}
 
-	/**
-	 * Sets the created by user id.
-	 *
-	 * @param createdByUserId the new created by user id
-	 */
 	public void setCreatedByUserId(String createdByUserId) {
 		this.createdByUserId = createdByUserId;
 	}
 
-	/**
-	 * Gets the created date.
-	 *
-	 * @return the created date
-	 */
 	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	/**
-	 * Sets the created date.
-	 *
-	 * @param createdDate the new created date
-	 */
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	/**
-	 * Gets the last edited by user id.
-	 *
-	 * @return the last edited by user id
-	 */
 	public String getLastEditedByUserId() {
 		return lastEditedByUserId;
 	}
 
-	/**
-	 * Sets the last edited by user id.
-	 *
-	 * @param lastEditedByUserId the new last edited by user id
-	 */
 	public void setLastEditedByUserId(String lastEditedByUserId) {
 		this.lastEditedByUserId = lastEditedByUserId;
 	}
 
-	/**
-	 * Gets the last edited date.
-	 *
-	 * @return the last edited date
-	 */
 	public Date getLastEditedDate() {
 		return lastEditedDate;
 	}
 
-	/**
-	 * Sets the last edited date.
-	 *
-	 * @param lastEditedDate the new last edited date
-	 */
 	public void setLastEditedDate(Date lastEditedDate) {
 		this.lastEditedDate = lastEditedDate;
 	}

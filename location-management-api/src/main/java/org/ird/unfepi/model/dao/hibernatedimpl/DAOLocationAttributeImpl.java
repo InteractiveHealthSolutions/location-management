@@ -74,9 +74,6 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl implements DAOLo
 		return (list.size() == 0 ? null : list);
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.ird.unfepi.model.dao.LocationAttribute#getAll()
-	 */
 	@Override
 	public List<LocationAttribute> getAll(boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationAttribute.class).setReadOnly(isreadonly);

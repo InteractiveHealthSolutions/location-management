@@ -1,36 +1,20 @@
-/**
- * 
- */
 package org.ird.unfepi.model.dao.hibernatedimpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.ird.unfepi.model.Location;
-import org.ird.unfepi.model.LocationAttribute;
 import org.ird.unfepi.model.LocationHierarchyAncester;
-import org.ird.unfepi.model.dao.DAOLocation;
 import org.ird.unfepi.model.dao.DAOLocationHierarchyAncester;
-
-import com.mysql.jdbc.StringUtils;
 
 @SuppressWarnings({"unchecked"})
 public class DAOLocationHierarchyAncesterImpl extends DAOHibernateImpl implements DAOLocationHierarchyAncester {
 	
-	/** The session. */
 	private Session session ;
 	private Number LAST_QUERY_TOTAL_ROW_COUNT;
 
-	/**
-	 * Instantiates a new dAO address impl.
-	 *
-	 * @param session the session
-	 */
 	public DAOLocationHierarchyAncesterImpl(Session session) {
 		super(session);
 		this.session=session;

@@ -1,16 +1,9 @@
-/**
- * 
- */
 package org.ird.unfepi.model.dao;
 
 import java.util.List;
 
 import org.ird.unfepi.model.Location;
 
-/**
- * @author Safwan
- *
- */
 public interface DAOLocation extends DAO {
 	
 	Location findById(int locationid, boolean isreadonly, String[] mappingsToJoin);

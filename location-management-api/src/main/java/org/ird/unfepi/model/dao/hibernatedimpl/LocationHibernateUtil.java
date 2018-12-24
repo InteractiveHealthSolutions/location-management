@@ -1,7 +1,3 @@
-/*
- * 
- */
-
 package org.ird.unfepi.model.dao.hibernatedimpl;
 
 import java.util.Properties;
@@ -12,6 +8,8 @@ import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.LocationAttribute;
 import org.ird.unfepi.model.LocationAttributeType;
 import org.ird.unfepi.model.LocationType;
+
+import com.mysql.jdbc.StringUtils;
 
 public class LocationHibernateUtil {
 	
@@ -65,7 +63,7 @@ public class LocationHibernateUtil {
 				conf.setProperties(properties);
 			}
 			
-			if(configFileName != null && !configFileName.trim().equals("")) {//!StringUtil..isEmptyOrWhitespaceOnly(configFileName)){
+			if(!StringUtils.isEmptyOrWhitespaceOnly(configFileName)){
 				conf.configure(configFileName);
 			}
 			else {
