@@ -12,7 +12,5 @@ public interface DAOLocationType extends DAO{
 
 	List<LocationType> findByLevel(int level, boolean isreadonly, String[] mappingsToJoin);
 	
-	Number LAST_QUERY_TOTAL_ROW_COUNT();
-
 	List<LocationType> getAll( boolean isreadonly, String[] mappingsToJoin);
 }

@@ -2,13 +2,10 @@ package org.ird.unfepi.model.dao;
 
 import java.util.List;
 
-import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.LocationHierarchyAncester;
 
 public interface DAOLocationHierarchyAncester extends DAO {
 	
-	Number LAST_QUERY_TOTAL_ROW_COUNT();
-
 	List<LocationHierarchyAncester> findById(int locationId, boolean isreadonly, String[] mappingsToJoin);
 	List<LocationHierarchyAncester> findByName(String name, boolean isreadonly, String[] mappingsToJoin);
 

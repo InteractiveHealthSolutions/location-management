@@ -3,98 +3,51 @@ package org.ird.unfepi.model.dao.hibernatedimpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.ird.unfepi.model.LocationType;
 import org.ird.unfepi.model.dao.DAOLocationType;
 
-@SuppressWarnings({"unchecked"})
-public class DAOLocationTypeImpl extends DAOHibernateImpl implements DAOLocationType{
+public class DAOLocationTypeImpl extends DAOHibernateImpl<LocationType> implements DAOLocationType{
 	
-	private Session session ;
-	private Number LAST_QUERY_TOTAL_ROW_COUNT;
-
 	public DAOLocationTypeImpl(Session session) {
 		super(session);
-		this.session = session;
+	}
+	
+	@Override
+	protected Class<?> getEntity() {
+		return LocationType.class;
 	}
 
 	@Override
 	public LocationType findById(int locationTypeId, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(LocationType.class)
-				.add(Restrictions.eq("locationTypeId", locationTypeId)).setReadOnly(isreadonly);
+		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
+				.add(Restrictions.eq("locationTypeId", locationTypeId));
 		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-
-		setLAST_QUERY_TOTAL_ROW_COUNT((Number) cri.setProjection(Projections.rowCount()).uniqueResult());
-		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-
-		List<LocationType> list = cri.list();
-		return (list.size() == 0 ? null : list.get(0));
+		return buildResult(cri);
 	}
 
 	@Override
 	public LocationType findByName(String name, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(LocationType.class)
-				.add(Restrictions.eq("typeName", name)).setReadOnly(isreadonly);
+		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
+				.add(Restrictions.eq("name", name));
 		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		setLAST_QUERY_TOTAL_ROW_COUNT((Number) cri.setProjection(Projections.rowCount()).uniqueResult());
-		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-
-		List<LocationType> list = cri.list();
-		return (list.size() == 0 ? null : list.get(0));
+		return buildResult(cri);
 	}
 	
 	@Override
 	public List<LocationType> findByLevel(int level, boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(LocationType.class)
-				.add(Restrictions.eq("level", level)).setReadOnly(isreadonly);
+		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
+				.add(Restrictions.eq("level", level));
 		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		setLAST_QUERY_TOTAL_ROW_COUNT((Number) cri.setProjection(Projections.rowCount()).uniqueResult());
-		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-
-		List<LocationType> list = cri.list();
-		return (list.size() == 0 ? null : list);
-	}
-	
-	private void setLAST_QUERY_TOTAL_ROW_COUNT(Number LAST_QUERY_TOTAL_ROW_COUNT) {
-		this.LAST_QUERY_TOTAL_ROW_COUNT = LAST_QUERY_TOTAL_ROW_COUNT;
-	}
-	
-	@Override
-	public Number LAST_QUERY_TOTAL_ROW_COUNT() {
-		return LAST_QUERY_TOTAL_ROW_COUNT;
+		return buildResultList(cri);
 	}
 
 	@Override
 	public List<LocationType> getAll(boolean isreadonly, String[] mappingsToJoin) {
-		Criteria cri = session.createCriteria(LocationType.class).setReadOnly(isreadonly);
+		Criteria cri = buildCriteria(isreadonly, mappingsToJoin);
 		
-		if(mappingsToJoin != null)
-			for (String mapping : mappingsToJoin) {
-				cri.setFetchMode(mapping, FetchMode.JOIN);
-			}
-		
-		setLAST_QUERY_TOTAL_ROW_COUNT((Number) cri.setProjection(Projections.rowCount()).uniqueResult());
-		cri.setProjection(null).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-
-		List<LocationType> list = cri.addOrder(Order.asc("level")).list();
-		return list;
+		return buildResultList(cri, Order.asc("level"));
 	}
 }

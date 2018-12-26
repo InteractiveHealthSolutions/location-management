@@ -9,26 +9,17 @@ import org.hibernate.criterion.Restrictions;
 import org.ird.unfepi.model.LocationHierarchyAncester;
 import org.ird.unfepi.model.dao.DAOLocationHierarchyAncester;
 
-@SuppressWarnings({"unchecked"})
-public class DAOLocationHierarchyAncesterImpl extends DAOHibernateImpl implements DAOLocationHierarchyAncester {
+public class DAOLocationHierarchyAncesterImpl extends DAOHibernateImpl<LocationHierarchyAncester> implements DAOLocationHierarchyAncester {
 	
-	private Session session ;
-	private Number LAST_QUERY_TOTAL_ROW_COUNT;
-
 	public DAOLocationHierarchyAncesterImpl(Session session) {
 		super(session);
-		this.session=session;
 	}
 
-	private void setLAST_QUERY_TOTAL_ROW_COUNT(Number LAST_QUERY_TOTAL_ROW_COUNT) {
-		this.LAST_QUERY_TOTAL_ROW_COUNT = LAST_QUERY_TOTAL_ROW_COUNT;
+	@Override
+	protected Class<?> getEntity() {
+		return LocationHierarchyAncester.class;
 	}
 	
-	@Override
-	public Number LAST_QUERY_TOTAL_ROW_COUNT() {
-		return LAST_QUERY_TOTAL_ROW_COUNT;
-	}
-
 	@Override
 	public List<LocationHierarchyAncester> findById(int locationId, boolean isreadonly, String[] mappingsToJoin) {
 		Criteria cri = session.createCriteria(LocationHierarchyAncester.class).setReadOnly(isreadonly)

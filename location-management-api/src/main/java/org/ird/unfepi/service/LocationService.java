@@ -18,9 +18,7 @@ public interface LocationService {
 	
 	Location findLocationByIdentifier(String identifier, boolean isreadonly, String[] mappingsToJoin);
 	
-	List<Location> findLocationByVoided(boolean voided, boolean isreadonly, String[] mappingsToJoin);
-	
-	List<Location> getAllLocation(boolean isreadonly, String[] mappingsToJoin);
+	List<Location> getAllLocation(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin);
 
 	LocationType findLocationTypeById(int id, boolean isreadonly, String[] mappingsToJoin);
 
@@ -36,17 +34,14 @@ public interface LocationService {
 	
 	List<LocationAttributeType> findLocationAttributeTypeByCategory(String category, boolean isreadonly, String[] mappingsToJoin);
 
-	List<LocationAttributeType> getAllLocationAttributeType(boolean isreadonly, String[] mappingsToJoin);
-
+	List<LocationAttributeType> getAllLocationAttributeType(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin);
+//TODO add LocationAttributeType by displayname 
 	LocationAttribute findLocationAttributeById(int id, boolean isreadonly, String[] mappingsToJoin);
 	
-	List<LocationAttribute> findLocationAttributeByValue(String value, boolean isreadonly, String[] mappingsToJoin);
+	List<LocationAttribute> findLocationAttributeByLocation(int locationId, boolean isreadonly, String[] mappingsToJoin);
 	
-	List<LocationAttribute> findLocationAttributeByTypeName(String typeName, boolean isreadonly, String[] mappingsToJoin);
-	
-	List<LocationAttribute> findLocationAttributeByCriteria(String typeName, String value, String typeValue1, String typeValue2, Integer locationId, Integer locationAttributeTypeId, int startRecord, int fetchSize, boolean isreadonly, String[] mappingsToJoin, String[] sqlFilter);
-
-	List<LocationAttribute> getAllLocationAttribute(boolean isreadonly, String[] mappingsToJoin);
+	List<LocationAttribute> findLocationAttributeByCriteria(Integer locationId, Integer locationAttributeTypeId, 
+			String rangeValue1, String rangeValue2, String value, boolean isreadonly, String[] mappingsToJoin);
 
 	List<LocationHierarchyAncester> findLocationHierarchyAncesterById(int locationId, boolean isreadonly, String[] mappingsToJoin);
 	
@@ -65,8 +60,6 @@ public interface LocationService {
 	
 	List<LocationHierarchyAncester> getAllLocationHierarchyAncester(boolean isreadonly, String[] mappingsToJoin);
 	
-	List<Location> findByHQL(int locId, boolean isreadonly, String[] mappingsToJoin);
-
 	Serializable addLocation(Location location);
 
 	Serializable addLocationType(LocationType locationType);

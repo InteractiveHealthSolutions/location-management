@@ -1,10 +1,7 @@
 package org.ird.unfepi.model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,71 +9,67 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ForeignKey;
+
 @Entity
 @Table(name = "location")
-public class Location {
+public class Location extends BaseLocationObject {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer locationId;
 	
-	@Column(length = 30, unique = true)
-	private String name;
-	
-	@Column(length = 50)
 	private String fullName;
 	
-	@Column(length = 30)
 	private String shortName;
 	
 	private String otherIdentifier;
 	
+	private String geopoint;
+	
 	private String latitude;
 	
 	private String longitude;
+	
+	private String ancestry;
+	
+	private String ancestryDetail;
+	
+	private boolean active;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateOpened;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateClosed;
 	
 	@ManyToOne(targetEntity = Location.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "parentLocation")
 	@ForeignKey(name = "location_parentLocation_location_locationId_FK")
 	private Location parentLocation;
 	
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = Location.class, mappedBy = "parentLocation")
-	private Set<Location> childLocations;
-	
-	@OneToOne(targetEntity = LocationType.class)
+	@OneToOne(targetEntity = LocationType.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "locationType")
 	@ForeignKey(name = "loaction_locationTypeId_locationType_locationTypeId_FK")
 	private LocationType locationType;
 	
-	private String description;
+	//TODO add location tags
 	
-	private boolean voided;
-	
-	private Integer voidedBy;
-	
-	private String voidReason;
-	
-	private Date dateVoided;
+	public Location() { }
 
-	private String createdByUserId;
+	@Override
+	public Integer getId() {
+		return locationId;
+	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
-	
-	private String lastEditedByUserId;
-	
-	/** The last edited date. */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastEditedDate;
-	
-	public Location() {
+	@Override
+	public void setId(Integer id) {
+		this.locationId = id;
 	}
 
 	public Integer getLocationId() {
@@ -85,14 +78,6 @@ public class Location {
 
 	public void setLocationId(Integer locationId) {
 		this.locationId = locationId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getFullName() {
@@ -119,6 +104,14 @@ public class Location {
 		this.otherIdentifier = otherIdentifier;
 	}
 
+	public String getGeopoint() {
+		return geopoint;
+	}
+
+	public void setGeopoint(String geopoint) {
+		this.geopoint = geopoint;
+	}
+
 	public String getLatitude() {
 		return latitude;
 	}
@@ -135,20 +128,52 @@ public class Location {
 		this.longitude = longitude;
 	}
 
+	public String getAncestry() {
+		return ancestry;
+	}
+
+	public void setAncestry(String ancestry) {
+		this.ancestry = ancestry;
+	}
+
+	public String getAncestryDetail() {
+		return ancestryDetail;
+	}
+
+	public void setAncestryDetail(String ancestryDetail) {
+		this.ancestryDetail = ancestryDetail;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Date getDateOpened() {
+		return dateOpened;
+	}
+
+	public void setDateOpened(Date dateOpened) {
+		this.dateOpened = dateOpened;
+	}
+
+	public Date getDateClosed() {
+		return dateClosed;
+	}
+
+	public void setDateClosed(Date dateClosed) {
+		this.dateClosed = dateClosed;
+	}
+
 	public Location getParentLocation() {
 		return parentLocation;
 	}
 
 	public void setParentLocation(Location parentLocation) {
 		this.parentLocation = parentLocation;
-	}
-
-	public Set<Location> getChildLocations() {
-		return childLocations;
-	}
-
-	public void setChildLocations(Set<Location> childLocations) {
-		this.childLocations = childLocations;
 	}
 
 	public LocationType getLocationType() {
@@ -158,126 +183,5 @@ public class Location {
 	public void setLocationType(LocationType locationType) {
 		this.locationType = locationType;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getCreatedByUserId() {
-		return createdByUserId;
-	}
-
-	public void setCreatedByUserId(String createdByUserId) {
-		this.createdByUserId = createdByUserId;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getLastEditedByUserId() {
-		return lastEditedByUserId;
-	}
-
-	public void setLastEditedByUserId(String lastEditedByUserId) {
-		this.lastEditedByUserId = lastEditedByUserId;
-	}
-
-	public Date getLastEditedDate() {
-		return lastEditedDate;
-	}
-
-	public void setLastEditedDate(Date lastEditedDate) {
-		this.lastEditedDate = lastEditedDate;
-	}
-
-	public boolean getVoided() {
-		return voided;
-	}
-
-	public void setVoided(boolean voided) {
-		this.voided = voided;
-	}
-	
-	public Date getDateVoided() {
-		return dateVoided;
-	}
-
-	public void setDateVoided(Date dateVoided) {
-		this.dateVoided = dateVoided;
-	}
-
-	public String getVoidReason() {
-		return voidReason;
-	}
-
-	public void setVoidReason(String voidReason) {
-		this.voidReason = voidReason;
-	}
-
-	public Integer getVoidedBy() {
-		return voidedBy;
-	}
-
-	public void setVoidedBy(Integer voidedBy) {
-		this.voidedBy = voidedBy;
-	}
-	
-	public void addChildLocation(Location child) throws Exception {
-		if (child == null)
-			return;
 		
-		if (getChildLocations() == null)
-			childLocations = new HashSet<Location>();
-		
-		if (child.equals(this))
-			throw new Exception("A location cannot be its own child!");
-		
-		// Traverse all the way up (down?) to the root, then check whether the child is already
-		// anywhere in the tree
-		Location root = this;
-		while (root.getParentLocation() != null)
-			root = root.getParentLocation();
-		
-		if (isInHierarchy(child, root))
-			throw new Exception("Location hierarchy loop detected! You cannot add: '" + child + "' to the parent: '"
-			        + this
-			        + "' because it is in the parent hierarchy somewhere already and a location cannot be its own parent.");
-		
-		child.setParentLocation(this);
-		childLocations.add(child);
-	}
-	
-	/**
-	 * Checks whether 'location' is a member of the tree starting at 'root'.
-	 * 
-	 * @param location The location to be tested.
-	 * @param root Location node from which to start the testing (down in the hierarchy).
-	 * @since 1.5
-	 * @should return false given any null parameter
-	 * @should return true given same object in both parameters
-	 * @should return true given location that is already somewhere in hierarchy
-	 * @should return false given location that is not in hierarchy
-	 * @should should find location in hierarchy
-	 */
-	public static Boolean isInHierarchy(Location location, Location root) {
-		if (root == null)
-			return false;
-		while (true) {
-			if (location == null)
-				return false;
-			else if (root.equals(location))
-				return true;
-			location = location.getParentLocation();
-		}
-	}
-	
 }
