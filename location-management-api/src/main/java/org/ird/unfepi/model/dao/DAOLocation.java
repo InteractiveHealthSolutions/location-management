@@ -12,5 +12,5 @@ public interface DAOLocation extends DAO {
 	
 	Location findByIdentifier(String identifier, boolean isreadonly, String[] mappingsToJoin);
 	
-	List<Location> getAll(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin);
+	List<Location> getAll(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin, String[] orders);
 }

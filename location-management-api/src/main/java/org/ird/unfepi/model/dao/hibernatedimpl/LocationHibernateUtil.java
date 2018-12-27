@@ -14,7 +14,7 @@ import com.mysql.jdbc.StringUtils;
 public class LocationHibernateUtil {
 	
  	private static SessionFactory sessionFactory;
-
+ 	
 	/* 	public synchronized static SessionFactory getSessionFactory() {
 	        if (sessionFactory == null) {
 	        	sessionFactory = new Configuration().configure().buildSessionFactory();

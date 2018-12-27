@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.ird.unfepi.model.LocationAttributeType;
 import org.ird.unfepi.model.dao.DAOLocationAttributeType;
@@ -41,7 +42,7 @@ public class DAOLocationAttributeTypeImpl  extends DAOHibernateImpl<LocationAttr
 		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
 				.add(Restrictions.eq("category", category));
 		
-		return buildResultList(cri);
+		return buildResultList(cri, Order.asc("name"));
 	}
 	
 	@Override
@@ -49,7 +50,7 @@ public class DAOLocationAttributeTypeImpl  extends DAOHibernateImpl<LocationAttr
 		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
 				.add(Restrictions.ilike("displayName", displayname, MatchMode.ANYWHERE));
 		
-		return buildResultList(cri);
+		return buildResultList(cri, Order.asc("displayName"));
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class DAOLocationAttributeTypeImpl  extends DAOHibernateImpl<LocationAttr
 			cri.add(Restrictions.eq("voided", false));
 		}
 		
-		return buildResultList(cri);
+		return buildResultList(cri, Order.asc("name"));
 	}
 	
 	// TODO add repeatable, dataType in search

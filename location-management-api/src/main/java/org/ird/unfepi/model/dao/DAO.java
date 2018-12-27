@@ -16,6 +16,8 @@ public interface DAO {
 
 	List<?> buildResultList(Criteria cri, Order... orders); 
 
+	List<?> buildResultList(Criteria cri, String... orders);
+
 	List<Object> executeSQL(String sql);
 	
 	Serializable save(Object objectinstance);
@@ -27,4 +29,5 @@ public interface DAO {
 	void update(Object objectinstance);
 	
 	void saveOrUpdate(Object objectinstance);
+
 }

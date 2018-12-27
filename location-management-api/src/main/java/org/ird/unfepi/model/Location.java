@@ -36,10 +36,6 @@ public class Location extends BaseLocationObject {
 	
 	private String longitude;
 	
-	private String ancestry;
-	
-	private String ancestryDetail;
-	
 	private boolean active;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -126,22 +122,6 @@ public class Location extends BaseLocationObject {
 
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
-	}
-
-	public String getAncestry() {
-		return ancestry;
-	}
-
-	public void setAncestry(String ancestry) {
-		this.ancestry = ancestry;
-	}
-
-	public String getAncestryDetail() {
-		return ancestryDetail;
-	}
-
-	public void setAncestryDetail(String ancestryDetail) {
-		this.ancestryDetail = ancestryDetail;
 	}
 
 	public boolean isActive() {

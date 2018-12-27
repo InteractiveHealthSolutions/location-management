@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.ird.unfepi.model.LocationAttribute;
 import org.ird.unfepi.model.dao.DAOLocationAttribute;
@@ -32,7 +33,7 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl<LocationAttribut
 		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
 				.add(Restrictions.eq("location.locationId", locationId));
 		
-		return buildResultList(cri);
+		return buildResultList(cri, Order.asc("name"));
 	}
 
 	@Override
@@ -58,6 +59,6 @@ public class DAOLocationAttributeImpl  extends DAOHibernateImpl<LocationAttribut
 			cri.add(Restrictions.eq("value", value));
 		}
 		
-		return buildResultList(cri);
+		return buildResultList(cri, Order.asc("name"));
 	}
 }

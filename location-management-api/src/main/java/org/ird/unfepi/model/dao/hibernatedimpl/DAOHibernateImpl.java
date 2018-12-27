@@ -1,6 +1,7 @@
 package org.ird.unfepi.model.dao.hibernatedimpl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -90,4 +91,20 @@ public abstract class DAOHibernateImpl <T> implements DAO{
 		return cri.list();
 	}
 
+	@Override
+	public List<T> buildResultList(Criteria cri, String... orders) {
+		List<Order> orderList = new ArrayList<>();
+		if(orders != null && orders.length > 0) {
+			for (String o : orders) {
+				if(o.toLowerCase().endsWith(" desc")) {
+					orderList.add(Order.desc(o.split("(?i) \\s desc")[0].trim()));
+				}
+				else {
+					orderList.add(Order.asc(o.split("(?i) \\s asc")[0].trim()));
+				}
+			}
+		}
+		
+		return buildResultList(cri, orders);
+	}
 }

@@ -6,12 +6,12 @@ import java.util.List;
 import org.ird.unfepi.model.Location;
 import org.ird.unfepi.model.LocationAttribute;
 import org.ird.unfepi.model.LocationAttributeType;
-import org.ird.unfepi.model.LocationHierarchyAncester;
+import org.ird.unfepi.model.LocationRelation;
 import org.ird.unfepi.model.LocationType;
 import org.ird.unfepi.model.dao.DAOLocation;
 import org.ird.unfepi.model.dao.DAOLocationAttribute;
 import org.ird.unfepi.model.dao.DAOLocationAttributeType;
-import org.ird.unfepi.model.dao.DAOLocationHierarchyAncester;
+import org.ird.unfepi.model.dao.DAOLocationRelation;
 import org.ird.unfepi.model.dao.DAOLocationType;
 import org.ird.unfepi.service.LocationService;
 
@@ -25,7 +25,7 @@ public class LocationServiceImpl implements LocationService {
 
 	private DAOLocationAttributeType daoLocationAttributeType;
 
-	private DAOLocationHierarchyAncester daoLocationHierarchyAncester;
+	private DAOLocationRelation daoLocationRelation;
 	
 	public LocationServiceImpl(DAOLocation daoLocation, DAOLocationType daoLocationType, DAOLocationAttribute daoLocationAttribute, DAOLocationAttributeType daoLocationAttributeType){
 		this.daoLocation = daoLocation;
@@ -33,7 +33,7 @@ public class LocationServiceImpl implements LocationService {
 		this.daoLocationAttribute = daoLocationAttribute;
 		this.daoLocationAttributeType = daoLocationAttributeType;
 		//TODO revamp the approach
-		this.daoLocationHierarchyAncester = null;
+		this.daoLocationRelation = null;
 	}
 
 	@Override
@@ -58,7 +58,12 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public List<Location> getAllLocation(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin) {
-		return daoLocation.getAll(includeVoided, isreadonly, mappingsToJoin);
+		return daoLocation.getAll(includeVoided, isreadonly, mappingsToJoin, null);
+	}
+	
+	@Override
+	public List<Location> getAllLocationOrderedByLevel(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin) {
+		return daoLocation.getAll(includeVoided, isreadonly, mappingsToJoin, new String[] {"level", "locationId"});
 	}
 	
 	@Override
@@ -178,67 +183,67 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationHierarchyAncesterById(int locationId,  boolean isreadonly,
+	public List<LocationRelation> findLocationRelationById(int locationId,  boolean isreadonly,
 			String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findById(locationId, isreadonly, mappingsToJoin);
+		return daoLocationRelation.findById(locationId, isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationHierarchyAncesterByName(String name, boolean isreadonly,
+	public List<LocationRelation> findLocationRelationByName(String name, boolean isreadonly,
 			String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findByName(name, isreadonly, mappingsToJoin);
+		return daoLocationRelation.findByName(name, isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationHierarchyAncesterByRelativeName(String relativename,
+	public List<LocationRelation> findLocationRelationByRelativeName(String relativename,
 			boolean isreadonly, String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findByRelativeName(relativename, isreadonly, mappingsToJoin);
+		return daoLocationRelation.findByRelativeName(relativename, isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationHierarchyAncesterByRelativeId(int relativeid, boolean isreadonly,
+	public List<LocationRelation> findLocationRelationByRelativeId(int relativeid, boolean isreadonly,
 			String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findByRelativeId(relativeid, isreadonly, mappingsToJoin);
+		return daoLocationRelation.findByRelativeId(relativeid, isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationHierarchyAncesterByLocationType(int locationtype,
+	public List<LocationRelation> findLocationRelationByLocationType(int locationtype,
 			boolean isreadonly, String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findByLocationType(locationtype, isreadonly, mappingsToJoin);
+		return daoLocationRelation.findByLocationType(locationtype, isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationHierarchyAncesterByRelativeLocationType(int relativetype,
+	public List<LocationRelation> findLocationRelationByRelativeLocationType(int relativetype,
 			boolean isreadonly, String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findByRelativeLocationType(relativetype,  isreadonly, mappingsToJoin);
+		return daoLocationRelation.findByRelativeLocationType(relativetype,  isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> getAllLocationHierarchyAncester(
+	public List<LocationRelation> getAllLocationRelation(
 			boolean isreadonly, String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.getAll(isreadonly, mappingsToJoin);
+		return daoLocationRelation.getAll(isreadonly, mappingsToJoin);
 	}
 
 	@Override
-	public Serializable addLocationHierarchyAncester(LocationHierarchyAncester locationHierarchyAncester) {
-		return daoLocationHierarchyAncester.save(locationHierarchyAncester);
+	public Serializable addLocationRelation(LocationRelation locationRelation) {
+		return daoLocationRelation.save(locationRelation);
 	}
 
 	@Override
-	public void updateLocationHierarchyAncester(LocationHierarchyAncester locationHierarchyAncester) {
-		 daoLocationHierarchyAncester.update(locationHierarchyAncester);
+	public void updateLocationRelation(LocationRelation locationRelation) {
+		 daoLocationRelation.update(locationRelation);
 	}
 
 	@Override
-	public void deleteLocationHierarchyAncester(LocationHierarchyAncester locationHierarchyAncester) {
-		 daoLocationHierarchyAncester.delete(locationHierarchyAncester);
+	public void deleteLocationRelation(LocationRelation locationRelation) {
+		 daoLocationRelation.delete(locationRelation);
 	}
 
 	@Override
-	public List<LocationHierarchyAncester> findLocationAncesterByCriteria(Integer locationId, String name,
+	public List<LocationRelation> findLocationAncesterByCriteria(Integer locationId, String name,
 			Integer locationtype, Integer relativeid, String relativename, Integer relativetype, 
 			boolean isreadonly, String[] mappingsToJoin) {
-		return daoLocationHierarchyAncester.findByCriteria(locationId, name, locationtype, relativeid, relativename, relativetype, isreadonly, mappingsToJoin);
+		return daoLocationRelation.findByCriteria(locationId, name, locationtype, relativeid, relativename, relativetype, isreadonly, mappingsToJoin);
 		
 	}
 

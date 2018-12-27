@@ -41,7 +41,7 @@ public class DAOLocationTypeImpl extends DAOHibernateImpl<LocationType> implemen
 		Criteria cri = buildCriteria(isreadonly, mappingsToJoin)
 				.add(Restrictions.eq("level", level));
 		
-		return buildResultList(cri);
+		return buildResultList(cri, Order.asc("name"));
 	}
 
 	@Override

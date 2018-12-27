@@ -43,14 +43,14 @@ public class DAOLocationImpl extends DAOHibernateImpl<Location> implements DAOLo
 	}
 
 	@Override
-	public List<Location> getAll(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin) {
+	public List<Location> getAll(boolean includeVoided, boolean isreadonly, String[] mappingsToJoin, String[] orders) {
 		Criteria cri = buildCriteria(isreadonly, mappingsToJoin);
 		
 		if(!includeVoided) {
 			cri.add(Restrictions.eq("voided", false));
 		}
 		
-		return buildResultList(cri);
+		return buildResultList(cri, orders);
 	}
 	
 	// TODO locations of certain types, level, under a specific parent, active filter
