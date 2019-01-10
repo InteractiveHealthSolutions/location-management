@@ -16,6 +16,10 @@ public class LocationAttributeType extends BaseLocationObject{
 	private String displayName;
 	
 	private boolean repeatable;
+
+	private boolean editable;
+
+	private boolean fore;
 	
 	private String validator;
 	
@@ -59,6 +63,22 @@ public class LocationAttributeType extends BaseLocationObject{
 
 	public void setRepeatable(boolean repeatable) {
 		this.repeatable = repeatable;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+
+	public boolean isFore() {
+		return fore;
+	}
+
+	public void setFore(boolean fore) {
+		this.fore = fore;
 	}
 
 	public String getValidator() {

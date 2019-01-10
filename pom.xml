@@ -10,6 +10,7 @@
   <modules>
   	<module>location-management-api</module>
     <module>location-management-web</module>
+    <module>location-management-app</module>
   </modules>
   
   <properties>

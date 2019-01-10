@@ -14,11 +14,17 @@ public class LocationType extends BaseLocationObject{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer locationTypeId;
 	
+	private String displayName;
+	
 	private Integer level;
 	
-	private Boolean isEditable;
+	private Boolean editable;
 	
 	public LocationType() { }
+
+	public LocationType(int locationTypeId) {
+		setLocationTypeId(locationTypeId);
+	}
 
 	@Override
 	public Integer getId() {
@@ -38,6 +44,14 @@ public class LocationType extends BaseLocationObject{
 		this.locationTypeId = locationTypeId;
 	}
 
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
 	public Integer getLevel() {
 		return level;
 	}
@@ -46,12 +60,13 @@ public class LocationType extends BaseLocationObject{
 		this.level = level;
 	}
 
-	public Boolean getIsEditable() {
-		return isEditable;
+	public Boolean getEditable() {
+		return editable;
 	}
 
-	public void setIsEditable(Boolean isEditable) {
-		this.isEditable = isEditable;
+	public void setEditable(Boolean editable) {
+		this.editable = editable;
 	}
+
 
 }

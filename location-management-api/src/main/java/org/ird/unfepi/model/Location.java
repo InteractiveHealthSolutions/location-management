@@ -1,5 +1,6 @@
 package org.ird.unfepi.model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
@@ -24,7 +26,7 @@ public class Location extends BaseLocationObject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer locationId;
 	
-	private String fullName;
+	private String displayName;
 	
 	private String shortName;
 	
@@ -58,6 +60,19 @@ public class Location extends BaseLocationObject {
 	
 	public Location() { }
 
+	public Location(int locationId) {
+		this.locationId = locationId;
+	}
+	
+	public Location(Location location) {
+		try {
+			BeanUtils.copyProperties(this, location);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	public Integer getId() {
 		return locationId;
@@ -76,12 +91,12 @@ public class Location extends BaseLocationObject {
 		this.locationId = locationId;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getDisplayName() {
+		return displayName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 
 	public String getShortName() {
